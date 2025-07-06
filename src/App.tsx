@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-massa-dark">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--background-color)' }}>
       <Navbar
         isWalletConnected={isConnected}
         walletAddress={address || undefined}

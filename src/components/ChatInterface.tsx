@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, FileText, Coins, Trophy, Calendar } from 'lucide-react';
+import { ProjectShowcase } from './ProjectShowcase';
 
 interface Message {
   id: string;
@@ -111,13 +112,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-massa-dark">
+    <div className="flex flex-col" style={{ height: 'calc(100vh - 4rem)', backgroundColor: 'var(--background-color)' }}>
       {/* Chat Header */}
-      <div className="bg-massa-gray border-b border-gray-700 px-6 py-4">
+      <div className="px-6 py-4 border-b border-gray-700 bg-surface">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-massa-purple/20 rounded-lg">
-              <Bot className="h-6 w-6 text-massa-purple" />
+            <div className="p-2 icon-container">
+              <Bot className="h-5 w-5 icon-container-accent" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-white">AI Asset Creator</h2>
@@ -125,24 +126,24 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
             </div>
           </div>
           <div className="flex items-center space-x-1">
-            <Sparkles className="h-4 w-4 text-massa-purple animate-pulse-slow" />
-            <span className="text-sm text-massa-purple font-medium">AI Powered</span>
+            <Sparkles className="h-4 w-4 animate-pulse-slow icon-container-accent" />
+            <span className="text-sm font-medium icon-container-accent">AI Powered</span>
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
       {messages.length <= 1 && (
-        <div className="px-6 py-4 bg-massa-gray/50 border-b border-gray-700">
+        <div className="px-6 py-4 bg-surface border-b border-gray-700">
           <p className="text-sm text-gray-400 mb-3">Quick start with popular NFT types:</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {quickActions.map((action, index) => (
               <button
                 key={index}
                 onClick={() => setInputValue(action.action)}
-                className="p-3 bg-massa-gray hover:bg-gray-600 rounded-lg transition-colors duration-200 flex flex-col items-center space-y-2 text-center"
+                className="quick-action-btn"
               >
-                <action.icon className="h-5 w-5 text-massa-purple" />
+                <action.icon className="h-5 w-5 icon-container-accent" />
                 <span className="text-xs text-white font-medium">{action.label}</span>
               </button>
             ))}
@@ -152,13 +153,18 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+        {/* Project Showcase - only show initially */}
+        {messages.length <= 1 && (
+          <ProjectShowcase />
+        )}
+        
         {messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div className={`flex items-start space-x-3 max-w-2xl ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              <div className={`p-2 rounded-full ${message.type === 'user' ? 'bg-massa-purple' : 'bg-massa-gray'}`}>
+              <div className={`p-2 icon-container ${message.type === 'user' ? 'bg-accent' : 'bg-surface'}`}>
                 {getMessageIcon(message.type)}
               </div>
               <div className={`chat-message ${message.type}`}>
@@ -174,7 +180,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
         {isTyping && (
           <div className="flex justify-start">
             <div className="flex items-start space-x-3 max-w-2xl">
-              <div className="p-2 rounded-full bg-massa-gray">
+              <div className="p-2 icon-container bg-surface">
                 <Bot className="h-5 w-5" />
               </div>
               <div className="chat-message ai">
@@ -192,16 +198,16 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
       </div>
 
       {/* Input Area */}
-      <div className="bg-massa-gray border-t border-gray-700 px-6 py-4">
+      <div className="bg-surface border-t border-gray-700 px-6 py-4">
         {!isWalletConnected && (
-          <div className="mb-4 p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
+          <div className="mb-4 p-3 status-warning">
             <p className="text-yellow-400 text-sm">
               💡 Connect your wallet to create and deploy redeemable NFTs
             </p>
           </div>
         )}
         
-        <div className="flex space-x-4">
+        <div className="flex space-x-3">
           <div className="flex-1">
             <textarea
               value={inputValue}
@@ -209,13 +215,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
               onKeyPress={handleKeyPress}
               placeholder="Describe the redeemable NFT you want to create..."
               rows={3}
-              className="w-full px-4 py-3 bg-massa-dark border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-massa-purple focus:border-transparent"
+              className="adaptic-textarea w-full"
             />
           </div>
           <button
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isTyping}
-            className="btn-primary px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 self-end"
+            className="btn-primary px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 self-end"
           >
             <Send className="h-4 w-4" />
             <span>Send</span>
