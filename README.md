@@ -6,7 +6,7 @@
 
 ## 🌟 What is Adaptic Protocol?
 
-Adaptic Protocol revolutionizes digital asset ownership by creating **AI-powered autonomous custody for redeemable NFTs** on the Massa blockchain. Unlike traditional static NFTs, our platform transforms digital ownership into dynamic, self-managing assets that adapt to real-world conditions through autonomous smart contracts and AI agents.
+Adaptic Protocol revolutionizes digital asset ownership by creating **AI-powered autonomous custody for redeemable NFTs** on the Massa blockchain. Unlike traditional static NFTs, our platform transforms digital ownership into dynamic, self-managing assets that adapt to real-world conditions through autonomous smart contracts and AI agents. For detailed description please check https://github.com/shreyan001/Adaptic/blob/main/adaptic-detailed-description.md
 
 ### 🎯 Core Innovation
 
