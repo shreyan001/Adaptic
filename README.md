@@ -294,33 +294,6 @@ adaptic-protocol/
 
 ---
 
-## 🛣️ Roadmap
-
-### 🎯 Phase 1: Core Platform (Q1 2025) ✅
-- ✅ AI-powered chat interface
-- ✅ Massa wallet integration
-- ✅ Basic redeemable NFT creation
-- ✅ Responsive web design
-
-### 🎯 Phase 2: Mobile & Advanced Features (Q2 2025)
-- 📱 **Mobile Application** - Native iOS/Android apps
-- 🔄 **Advanced DeFi Options** - Custom liquidation mechanisms
-- 🎪 **Auction Systems** - Specialized redeemable NFT auctions
-- 🔐 **Permission Systems** - Granular smart contract permissions
-
-### 🎯 Phase 3: Ecosystem Expansion (Q3 2025)
-- 🌐 **Multi-chain Support** - Cross-chain redeemable assets
-- 👥 **Community Features** - Asset sharing and collaboration
-- 🏪 **Marketplace** - Decentralized trading platform
-- 🔧 **Developer Tools** - APIs and SDKs for third-party integration
-
-### 🎯 Phase 4: Enterprise & Scaling (Q4 2025)
-- 🏢 **Enterprise Solutions** - White-label platform options
-- 🤖 **Advanced AI Features** - Predictive asset management
-- 📊 **Analytics Dashboard** - Comprehensive portfolio insights
-- 🌍 **Global Compliance** - Multi-jurisdiction regulatory compliance
-
----
 
 ## 🤝 Contributing
 
@@ -334,38 +307,7 @@ We welcome contributions from the community! Here's how you can help:
 5. Push to your branch: `git push origin feature/amazing-feature`
 6. Open a Pull Request
 
-### 🎯 Areas for Contribution
-- 🤖 **AI Agent Improvements** - Enhance conversation understanding
-- 🎨 **UI/UX Enhancements** - Improve user experience
-- 🔗 **Blockchain Integration** - Expand Massa features usage
-- 📚 **Documentation** - Help others understand the platform
-- 🧪 **Testing** - Add comprehensive test coverage
 
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🌟 Support the Project
-
-If you find Adaptic Protocol useful, please consider:
-- ⭐ **Starring** this repository
-- 🐦 **Following** us on [Twitter](https://twitter.com/adaptic_protocol)
-- 💬 **Joining** our [Discord](https://discord.gg/adaptic) community
-- 📧 **Subscribing** to our newsletter for updates
-
----
-
-## 📞 Contact & Community
-
-- 🌐 **Website**: [adaptic.protocol](https://adaptic.protocol)
-- 🐦 **Twitter**: [@adaptic_protocol](https://twitter.com/adaptic_protocol)
-- 💬 **Discord**: [Join our community](https://discord.gg/adaptic)
-- 📧 **Email**: hello@adaptic.protocol
-- 📚 **Documentation**: [docs.adaptic.protocol](https://docs.adaptic.protocol)
 
 ---
 
