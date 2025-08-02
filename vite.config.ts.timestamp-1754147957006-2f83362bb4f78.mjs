@@ -1,0 +1,11 @@
+// vite.config.ts
+import { defineConfig } from "file:///C:/Users/acer/OneDrive/Desktop/massa/my-massa-dapp/node_modules/.pnpm/vite@5.4.19_lightningcss@1.30.1/node_modules/vite/dist/node/index.js";
+import react from "file:///C:/Users/acer/OneDrive/Desktop/massa/my-massa-dapp/node_modules/.pnpm/@vitejs+plugin-react@4.6.0_vite@5.4.19_lightningcss@1.30.1_/node_modules/@vitejs/plugin-react/dist/index.mjs";
+import tailwindcss from "file:///C:/Users/acer/OneDrive/Desktop/massa/my-massa-dapp/node_modules/.pnpm/@tailwindcss+vite@4.1.11_vite@5.4.19_lightningcss@1.30.1_/node_modules/@tailwindcss/vite/dist/index.mjs";
+var vite_config_default = defineConfig({
+  plugins: [tailwindcss(), react()]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcudHMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJDOlxcXFxVc2Vyc1xcXFxhY2VyXFxcXE9uZURyaXZlXFxcXERlc2t0b3BcXFxcbWFzc2FcXFxcbXktbWFzc2EtZGFwcFwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiQzpcXFxcVXNlcnNcXFxcYWNlclxcXFxPbmVEcml2ZVxcXFxEZXNrdG9wXFxcXG1hc3NhXFxcXG15LW1hc3NhLWRhcHBcXFxcdml0ZS5jb25maWcudHNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL0M6L1VzZXJzL2FjZXIvT25lRHJpdmUvRGVza3RvcC9tYXNzYS9teS1tYXNzYS1kYXBwL3ZpdGUuY29uZmlnLnRzXCI7aW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSAndml0ZSdcbmltcG9ydCByZWFjdCBmcm9tICdAdml0ZWpzL3BsdWdpbi1yZWFjdCdcbmltcG9ydCB0YWlsd2luZGNzcyBmcm9tICdAdGFpbHdpbmRjc3Mvdml0ZSdcblxuXG4vLyBodHRwczovL3ZpdGUuZGV2L2NvbmZpZy9cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XG4gIHBsdWdpbnM6IFt0YWlsd2luZGNzcygpLHJlYWN0KCldLFxufSlcbiJdLAogICJtYXBwaW5ncyI6ICI7QUFBc1YsU0FBUyxvQkFBb0I7QUFDblgsT0FBTyxXQUFXO0FBQ2xCLE9BQU8saUJBQWlCO0FBSXhCLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQzFCLFNBQVMsQ0FBQyxZQUFZLEdBQUUsTUFBTSxDQUFDO0FBQ2pDLENBQUM7IiwKICAibmFtZXMiOiBbXQp9Cg==

@@ -525,13 +525,13 @@ export const NFTChatInterface: React.FC<NFTChatInterfaceProps> = ({
           {showWelcome && messages.length === 0 && (
             <div className="text-center py-12">
               <div className="mb-8">
-                <div className="w-16 h-16 bg-black text-white border-2 border-black flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-black text-white border-2 text-center border-black flex items-center justify-center mx-auto mb-4">
                   <Sparkles className="h-8 w-8" />
                 </div>
-                <h1 className="text-3xl font-bold geist-mono uppercase tracking-wider mb-4">
+                <h1 className="text-3xl font-bold geist-mono uppercase tracking-wider text-black mb-4">
                   WELCOME TO ADAPTIC PROTOCOL
                 </h1>
-                <p className="text-lg geist-mono max-w-2xl mx-auto mb-8">
+                <p className="text-sm geist-mono w-4xl text-center text-black mb-8">
                   I'm your **AI ASSISTANT** for creating autonomous redeemable NFTs on the Massa blockchain. 
                   I specialize in generating smart contracts that evolve based on real-world conditions.
                 </p>
