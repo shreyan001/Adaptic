@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Wallet, Menu, X, Bot, Sparkles } from 'lucide-react';
-import { Button } from '@massalabs/react-ui-kit';
+import { Wallet, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   isWalletConnected: boolean;
@@ -22,76 +21,73 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <nav className="border-b border-gray-700" style={{ backgroundColor: 'var(--surface-color)' }}>
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="flex h-16 justify-between items-center">
+    <nav className="bg-black border-b-2 border-white">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
-          <div className="flex items-center space-x-3">
-            <img 
-              src="/adaptic.logo.png" 
-              alt="Adaptic Protocol" 
-              className="adaptic-logo"
-            />
-            <div className="flex items-center space-x-2">
-              <h1 className="text-xl font-bold text-white">Adaptic Protocol</h1>
-              <div className="flex items-center space-x-1 px-2 py-1 icon-container">
-                <Bot className="h-4 w-4 icon-container-accent" />
-                <Sparkles className="h-3 w-3 animate-pulse-slow icon-container-accent" />
-              </div>
+          <div className="flex items-center space-x-3 min-w-0">
+            <div className="w-12 h-12 bg-white border-2 border-white flex items-center justify-center rounded-lg overflow-hidden flex-shrink-0">
+              <img 
+                src="/adaptic.logo.png" 
+                alt="Adaptic Protocol Logo" 
+                className="w-10 h-10 object-contain"
+              />
+            </div>
+            <div className="flex flex-col min-w-0">
+              <h1 className="text-lg font-bold text-white geist-mono uppercase tracking-wider truncate">
+                ADAPTIC PROTOCOL
+              </h1>
+              <span className="text-xs text-gray-300 geist-mono uppercase tracking-wider truncate">
+                AI-POWERED REDEEMABLE NFTS
+              </span>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <a href="#dashboard" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Dashboard
-            </a>
-            <a href="#marketplace" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Marketplace
-            </a>
-            <a href="#portfolio" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Portfolio
-            </a>
-            <a href="#docs" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Docs
-            </a>
-
-            {/* Wallet Connection */}
-            <div className="flex items-center space-x-3">
-              {isWalletConnected ? (
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center space-x-2 px-3 py-2 status-connected">
-                    <div className="h-2 w-2 animate-pulse" style={{ backgroundColor: 'var(--success-color)' }}></div>
-                    <span className="text-sm font-mono text-green-400">
-                      {formatAddress(walletAddress || '')}
-                    </span>
-                  </div>
-                  <Button
-                    variant="secondary"
-                    onClick={onDisconnectWallet}
-                    className="btn-compact"
-                  >
-                    Disconnect
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  variant="primary"
-                  onClick={onConnectWallet}
-                  className="flex items-center space-x-2"
-                >
-                  <Wallet className="h-4 w-4" />
-                  <span>Connect Wallet</span>
-                </Button>
-              )}
+          <div className="hidden lg:flex items-center justify-center flex-1 max-w-2xl mx-8">
+            <div className="flex items-stretch border-2 border-white rounded-lg overflow-hidden">
+              <button className="px-4 py-2 text-white hover:bg-white hover:text-black transition-all duration-200 border-r border-white geist-mono font-medium text-sm uppercase tracking-wider">DASHBOARD</button>
+              <button className="px-4 py-2 text-white hover:bg-white hover:text-black transition-all duration-200 border-r border-white geist-mono font-medium text-sm uppercase tracking-wider">MARKETPLACE</button>
+              <button className="px-4 py-2 text-white hover:bg-white hover:text-black transition-all duration-200 border-r border-white geist-mono font-medium text-sm uppercase tracking-wider">PORTFOLIO</button>
+              <button className="px-4 py-2 text-white hover:bg-white hover:text-black transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider">DOCS</button>
             </div>
           </div>
 
+          {/* Wallet Connection */}
+          <div className="hidden md:flex items-center space-x-3 flex-shrink-0">
+            {isWalletConnected ? (
+              <div className="flex items-center space-x-3">
+                <div className="bg-white text-black px-4 py-2 border-2 border-white rounded">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm geist-mono font-bold">
+                      {formatAddress(walletAddress || '')}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={onDisconnectWallet}
+                  className="px-4 py-2 bg-red-600 text-white border-2 border-red-600 hover:bg-white hover:text-red-600 transition-all duration-200 geist-mono font-medium uppercase tracking-wider rounded"
+                >
+                  DISCONNECT
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={onConnectWallet}
+                className="px-4 py-2 bg-white text-black border-2 border-white hover:bg-black hover:text-white transition-all duration-200 geist-mono font-medium uppercase tracking-wider flex items-center space-x-2 rounded"
+              >
+                <Wallet className="h-4 w-4" />
+                <span>CONNECT WALLET</span>
+              </button>
+            )}
+          </div>
+
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-400 hover:text-white p-2"
+              className="text-white hover:bg-white hover:text-black p-2 transition-all duration-200"
             >
               {isMobileMenuOpen ? (
                 <X className="h-5 w-5" />
@@ -104,48 +100,40 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-700">
-            <div className="flex flex-col space-y-4">
-              <a href="#dashboard" className="text-gray-300 hover:text-white transition-colors text-sm">
-                Dashboard
-              </a>
-              <a href="#marketplace" className="text-gray-300 hover:text-white transition-colors text-sm">
-                Marketplace
-              </a>
-              <a href="#portfolio" className="text-gray-300 hover:text-white transition-colors text-sm">
-                Portfolio
-              </a>
-              <a href="#docs" className="text-gray-300 hover:text-white transition-colors text-sm">
-                Docs
-              </a>
+          <div className="lg:hidden py-4 border-t-2 border-white">
+            <div className="flex flex-col space-y-2">
+              <button className="px-4 py-3 text-left text-white hover:bg-white hover:text-black transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider border-b border-gray-600">DASHBOARD</button>
+              <button className="px-4 py-3 text-left text-white hover:bg-white hover:text-black transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider border-b border-gray-600">MARKETPLACE</button>
+              <button className="px-4 py-3 text-left text-white hover:bg-white hover:text-black transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider border-b border-gray-600">PORTFOLIO</button>
+              <button className="px-4 py-3 text-left text-white hover:bg-white hover:text-black transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider">DOCS</button>
               
               {/* Mobile Wallet Connection */}
-              <div className="pt-4 border-t border-gray-700">
+              <div className="pt-4 border-t-2 border-white mt-4">
                 {isWalletConnected ? (
                   <div className="space-y-3">
-                    <div className="flex items-center space-x-2 px-3 py-2 status-connected">
-                      <div className="h-2 w-2 animate-pulse" style={{ backgroundColor: 'var(--success-color)' }}></div>
-                      <span className="text-sm font-mono text-green-400">
-                        {formatAddress(walletAddress || '')}
-                      </span>
+                    <div className="bg-white text-black px-4 py-3 border-2 border-white rounded">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span className="text-sm geist-mono font-bold">
+                          {formatAddress(walletAddress || '')}
+                        </span>
+                      </div>
                     </div>
-                    <Button
-                      variant="secondary"
+                    <button
                       onClick={onDisconnectWallet}
-                      className="w-full"
+                      className="w-full px-4 py-3 bg-red-600 text-white border-2 border-red-600 hover:bg-white hover:text-red-600 transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider rounded"
                     >
-                      Disconnect Wallet
-                    </Button>
+                      DISCONNECT WALLET
+                    </button>
                   </div>
                 ) : (
-                  <Button
-                    variant="primary"
+                  <button
                     onClick={onConnectWallet}
-                    className="w-full flex items-center justify-center space-x-2"
+                    className="w-full px-4 py-3 bg-white text-black border-2 border-white hover:bg-black hover:text-white transition-all duration-200 geist-mono font-medium text-sm uppercase tracking-wider flex items-center justify-center space-x-2 rounded"
                   >
                     <Wallet className="h-4 w-4" />
-                    <span>Connect Wallet</span>
-                  </Button>
+                    <span>CONNECT WALLET</span>
+                  </button>
                 )}
               </div>
             </div>

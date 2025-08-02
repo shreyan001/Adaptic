@@ -1,0 +1,293 @@
+I'll help you create a comprehensive design system prompt and a reference navigation file for your black & white Web3 project. Here's what you need:
+
+## **Master Design System Prompt**
+
+```
+DESIGN SYSTEM SPECIFICATION - BLACK & WHITE WEB3 PROJECT
+
+CORE PRINCIPLES:
+- Strictly black (#000000) and white (#ffffff) color scheme
+- Sharp, geometric borders (border-radius: 0px always)
+- Space Mono font family for all text
+- Minimalist, brutalist aesthetic
+- Web3/crypto-native feel
+
+TYPOGRAPHY:
+- Primary font: 'Space Mono', monospace
+- Font weights: 400 (regular), 700 (bold)
+- Heading hierarchy: text-4xl, text-3xl, text-2xl, text-xl
+- Body text: text-base, text-sm
+- All text either black or white for maximum contrast
+
+BUTTON PATTERNS:
+- Default: bg-black text-white border-2 border-black hover:bg-white hover:text-black
+- Secondary: bg-white text-black border-2 border-black hover:bg-black hover:text-white
+- Disabled: bg-gray-200 text-gray-400 border-2 border-gray-200
+- Sizes: px-6 py-3 (default), px-4 py-2 (small), px-8 py-4 (large)
+- Always use transition-all duration-200 for hover effects
+
+FORM ELEMENTS:
+- Inputs: bg-white border-2 border-black focus:outline-none focus:border-black
+- Labels: text-black font-bold text-sm uppercase tracking-wider
+- Error states: border-red-500 with red text
+- Placeholders: text-gray-500
+
+LAYOUT PATTERNS:
+- Containers: max-w-7xl mx-auto px-4
+- Grid systems: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+- Spacing: space-y-4, space-y-6, space-y-8 for vertical rhythm
+- Borders: always 2px solid, never rounded
+
+COMPONENT STYLING:
+- Cards: bg-white border-2 border-black p-6
+- Navigation: bg-black text-white with white hover states
+- Modals: bg-white border-4 border-black with black backdrop
+- Tables: border-collapse with alternating black/white rows
+
+INTERACTIVE STATES:
+- Hover: Invert colors (black becomes white, white becomes black)
+- Active: Add slight scale transform: scale-95
+- Focus: Thick black outline, no rounded corners
+- Loading: Black/white pulsing animation
+
+ICONOGRAPHY:
+- Use simple, geometric icons
+- Always black or white, no colors
+- Sharp edges, no rounded icon styles
+- Consistent stroke width
+
+RESPONSIVE BEHAVIOR:
+- Mobile-first approach
+- Stack vertically on small screens
+- Maintain sharp edges across all breakpoints
+- Text remains readable at all sizes
+```
+
+## **Reference Navigation Component**
+
+Create this file as `src/components/ReferenceNav.jsx`:
+
+```jsx
+import React, { useState } from 'react';
+
+const ReferenceNav = () => {
+  const [activeSection, setActiveSection] = useState('buttons');
+
+  const sections = {
+    buttons: {
+      title: 'BUTTON PATTERNS',
+      content: (
+        
+          {/* Primary Button */}
+          
+            Primary Action
+          
+          
+          {/* Secondary Button */}
+          
+            Secondary Action
+          
+          
+          {/* Small Button */}
+          
+            Small Button
+          
+          
+          {/* Large Button */}
+          
+            Large Button
+          
+        
+      )
+    },
+    forms: {
+      title: 'FORM ELEMENTS',
+      content: (
+        
+          
+            
+              Input Label
+            
+            
+          
+          
+          
+            
+              Select Dropdown
+            
+            
+              Option 1
+              Option 2
+            
+          
+          
+          
+            
+              Textarea
+            
+            
+          
+        
+      )
+    },
+    cards: {
+      title: 'CARD PATTERNS',
+      content: (
+        
+          {/* Basic Card */}
+          
+            CARD TITLE
+            Card content goes here. This is the standard card pattern.
+            
+              Action
+            
+          
+          
+          {/* Inverted Card */}
+          
+            INVERTED CARD
+            This is the inverted version of the card pattern.
+            
+              Action
+            
+          
+        
+      )
+    },
+    typography: {
+      title: 'TYPOGRAPHY SCALE',
+      content: (
+        
+          H1 HEADING
+          H2 HEADING
+          H3 HEADING
+          H4 HEADING
+          Regular body text paragraph. This shows the standard text size and spacing.
+          Small text for captions and secondary information.
+          BOLD UPPERCASE TEXT
+        
+      )
+    }
+  };
+
+  return (
+    
+      {/* Navigation Header */}
+      
+        
+          
+            
+              DESIGN SYSTEM
+            
+            
+              {Object.entries(sections).map(([key, section]) => (
+                 setActiveSection(key)}
+                  className={`px-4 py-2 font-bold text-sm uppercase tracking-wider border-l-2 border-white transition-all duration-200 ${
+                    activeSection === key 
+                      ? 'bg-white text-black' 
+                      : 'bg-black text-white hover:bg-white hover:text-black'
+                  }`}
+                >
+                  {key}
+                
+              ))}
+            
+          
+        
+      
+
+      {/* Content Area */}
+      
+        
+          
+            {sections[activeSection].title}
+          
+          {sections[activeSection].content}
+        
+      
+    
+  );
+};
+
+export default ReferenceNav;
+```
+
+## **Implementation Instructions**
+
+1. **Add this to your main CSS file** (update your existing one):
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.geist-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+/* Force sharp edges globally */
+* {
+  border-radius: 0 !important;
+}
+```
+
+2. **Use this prompt when asking AI to build components**:
+
+```
+Build a [COMPONENT NAME] using the black & white design system. Requirements:
+- Use only black (#000000) and white (#ffffff) colors
+- All borders must be 2px solid with border-radius: 0
+- Use Space Mono font family with geist-mono class
+- Buttons: bg-black text-white hover:bg-white hover:text-black pattern
+- Sharp geometric design, no rounded corners anywhere
+- Include proper hover states with color inversion
+- Use uppercase text with tracking-wider for labels
+- Follow mobile-first responsive design
+- Add transition-all duration-200 for smooth interactions
+```
+
+This gives you a complete reference system that you can always point back to when building new components or pages!

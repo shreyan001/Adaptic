@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, FileText, Coins, Trophy, Calendar } from 'lucide-react';
-import { ProjectShowcase } from './ProjectShowcase';
-
+import ProjectShowcase from './ProjectShowcase';
 interface Message {
   id: string;
   type: 'user' | 'ai';
@@ -30,6 +29,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -100,6 +100,12 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
     }
   };
 
+  const handleLaunchChat = () => {
+    // Focus on the input area and scroll to it
+    inputRef.current?.focus();
+    inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   const getMessageIcon = (type: string) => {
     return type === 'user' ? <User className="h-5 w-5" /> : <Bot className="h-5 w-5" />;
   };
@@ -155,7 +161,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
       <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
         {/* Project Showcase - only show initially */}
         {messages.length <= 1 && (
-          <ProjectShowcase />
+          <ProjectShowcase onLaunchChat={handleLaunchChat} />
         )}
         
         {messages.map((message) => (
@@ -210,6 +216,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
         <div className="flex space-x-3">
           <div className="flex-1">
             <textarea
+              ref={inputRef}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
