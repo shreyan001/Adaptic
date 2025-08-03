@@ -9,11 +9,10 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ onLaunchChat }) => {
   return (
     <div className="bg-white border-2 border-black p-8">
       {/* Header Section */}
-      <div className="text-center gap-2 mb-12">
-        <div className='w-100% h-fit flex items-center justify-center'>
+      <div className="text-center mb-12">
         <div className="w-20 h-20 bg-black text-white border-2 border-black flex items-center justify-center mx-auto mb-6 rounded-lg">
           <Bot className="h-10 w-10" />
-        </div></div>
+        </div>
         <h1 className="text-4xl font-bold text-black geist-mono uppercase tracking-wider mb-4">
           ADAPTIC PROTOCOL
         </h1>

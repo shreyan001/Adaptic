@@ -21,11 +21,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <nav className="bg-black border-b-2 py-2.5 w-[100%] flex items-center justify-center border-white">
-      <div className="w-[90%] mx-auto px-4">
+    <nav className="bg-black border-b-2 border-white w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo and Brand */}
-          <div className="flex items-center space-x-6 gap-1.5 flex-shrink-0">
+          <div className="flex items-center space-x-4 flex-shrink-0">
             <div className="w-12 h-12 bg-white border-2 border-white flex items-center justify-center rounded-lg">
               <img 
                 src="/adaptic.logo.png" 
@@ -44,8 +44,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center flex-1 px-8">
-            <div className="flex items-center justify-center border gap-1.5 border-white rounded-lg overflow-hidden">
+          <div className="hidden md:flex items-center justify-center flex-1 mx-8">
+            <div className="flex items-center justify-center border border-white rounded-lg overflow-hidden">
               <button className="px-8 py-3 text-white hover:bg-white hover:text-black transition-all duration-200 border-r border-white geist-mono font-medium uppercase tracking-wider">DASHBOARD</button>
               <button className="px-8 py-3 text-white hover:bg-white hover:text-black transition-all duration-200 border-r border-white geist-mono font-medium uppercase tracking-wider">MARKETPLACE</button>
               <button className="px-8 py-3 text-white hover:bg-white hover:text-black transition-all duration-200 border-r border-white geist-mono font-medium uppercase tracking-wider">PORTFOLIO</button>

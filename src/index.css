@@ -33,8 +33,6 @@ body, html {
 * {
   box-sizing: border-box;
   border-radius: 0 !important;
-  margin: 0;
-  padding: 0;
 }
 
 /* TYPOGRAPHY */
@@ -82,6 +80,56 @@ body, html {
 .card { background: #fff; color: #000; }
 .card-inverted { background: #000; color: #fff; }
 
+/* INPUT SYSTEM */
+.adaptic-textarea {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 16px;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.adaptic-textarea:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.adaptic-textarea::placeholder {
+  color: #666;
+  opacity: 1;
+}
+.adaptic-textarea:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Chat Message Scrolling */
+.chat-scroll-area {
+  scroll-behavior: smooth;
+}
+
+.chat-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-scroll-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-scroll-area::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.chat-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
 /* NAV STYLES */
 .nav {
   background: #000;
@@ -123,4 +171,12 @@ body, html {
 /* RESPOND TO MOBILE */
 @media (max-width: 768px) {
   .container { padding: 0 0.5rem; }
+  .adaptic-textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 100px;
+  }
+  .btn-primary {
+    min-height: 56px;
+    padding: 16px 20px;
+  }
 }

@@ -49,7 +49,7 @@ function App() {
   }
 
   return (
-    <div className="app h-max bg-black">
+    <div className="app min-h-screen bg-black flex flex-col">
       <Navbar
         isWalletConnected={isWalletConnected}
         walletAddress={walletAddress || undefined}
@@ -57,11 +57,11 @@ function App() {
         onDisconnectWallet={handleDisconnectWallet}
       />
 
-      <main className="main-content w-100vw flex justify-center items-center">
+      <main className="flex-1 flex flex-col w-full">
         {/* View Toggle */}
         <div className="border-b-2 border-white bg-black w-full">
-          <div className="max-w-7xl mx-auto px-4 w-full">
-            <div className="flex items-center justify-between h-16 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
               {/* View Switcher */}
               <div className="flex items-center border-2 border-white overflow-hidden">
                 <button
@@ -83,7 +83,7 @@ function App() {
               </div>
 
               {/* Status Indicators */}
-              <div className="flex items-center space-x-6 text-xs geist-mono uppercase gap-3 tracking-wider text-white">
+              <div className="flex items-center space-x-4 text-xs geist-mono uppercase tracking-wider text-white">
                 <div className="flex items-center space-x-2">
                   <div
                     className={`w-3 h-3 rounded-full border border-white ${isWalletConnected ? "bg-green-500" : "bg-red-500"
@@ -108,8 +108,7 @@ function App() {
             <NFTChatInterface
               isWalletConnected={isWalletConnected}
               walletAddress={walletAddress || undefined}
-              apiBaseUrl="http://localhost:3001"
-              apiEndpoint="/api/nft-agent"
+              apiUrl="http://localhost:3001/api/agent"
             />
           ) : (
             <div className="h-full overflow-y-auto bg-black">

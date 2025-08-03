@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, FileText, Coins, Trophy, Calendar } from 'lucide-react';
+import { Send, Bot, Sparkles, FileText, Coins, Trophy, Calendar, Loader2 } from 'lucide-react';
 import ProjectShowcase from './ProjectShowcase';
 interface Message {
   id: string;
@@ -29,7 +29,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -40,29 +40,36 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
   }, [messages]);
 
   const simulateAIResponse = (userMessage: string): string => {
+    // Check if backend is available (this would be replaced with actual backend check)
+    const isBackendConnected = false; // This should be determined by actual API health check
+    
+    if (!isBackendConnected) {
+      return `🔌 Backend connection failed. Server unavailable or not responding. Check if backend is running and try again.`;
+    }
+    
     const message = userMessage.toLowerCase();
     
     if (message.includes('tournament') || message.includes('gaming')) {
-      return "🎮 Great choice! I can help you create gaming tournament NFTs. These can serve as entry passes that automatically update with bracket progressions and prize pool changes. Would you like to set up a tournament with automatic bracket management, or create betting positions that update with match results?";
+      return "🎮 Gaming tournament NFT: Entry passes with auto-updating brackets and prize pools. Want automatic bracket management or betting positions?";
     }
     
     if (message.includes('domain')) {
-      return "🌐 Domain custody NFTs are perfect for managing your domain portfolio! I can create smart contracts that automatically track expiry dates, renewal costs, and estimated values. Your domains can even be used as collateral for DeFi loans. What domains would you like to tokenize?";
+      return "🌐 Domain custody NFT: Auto-track expiry dates, renewal costs, values. Use as DeFi collateral. Which domains to tokenize?";
     }
     
     if (message.includes('ticket') || message.includes('event')) {
-      return "🎫 Event ticket NFTs that evolve over time! I can create tickets that start as basic entry and upgrade to VIP experiences as events approach. They can include backstage pass eligibility and become collectibles post-event. What type of event are you organizing?";
+      return "🎫 Event ticket NFT: Evolves from basic entry to VIP, includes backstage access, becomes collectible. What event type?";
     }
     
     if (message.includes('help') || message.includes('what')) {
-      return "I can help you create various types of redeemable NFTs:\n\n🎮 Gaming Tournament NFTs - Entry passes + betting positions\n🌐 Domain Custody NFTs - Automated domain management\n🎫 Event Ticket NFTs - Evolving event experiences\n💼 Software License NFTs - Transferable licenses\n🏆 Achievement NFTs - Cross-platform gaming rewards\n📱 Subscription NFTs - Transferable service access\n\nWhich interests you most?";
+      return "Available NFT types:\n🎮 Gaming Tournament\n🌐 Domain Custody\n🎫 Event Tickets\n💼 Software Licenses\n🏆 Achievements\n📱 Subscriptions\n\nWhich interests you?";
     }
     
     if (message.includes('wallet') && !isWalletConnected) {
-      return "To create and manage NFTs, you'll need to connect your Massa wallet first. Please click the 'Connect Wallet' button in the navbar to get started!";
+      return "Connect your Massa wallet first to create NFTs. Click 'Connect Wallet' in navbar.";
     }
     
-    return "I understand you're interested in creating redeemable NFTs! Could you tell me more about what type of asset you'd like to tokenize? I can help with gaming assets, domains, event tickets, software licenses, and many other redeemable items.";
+    return "What type of redeemable NFT do you want to create? (gaming, domains, tickets, licenses, etc.)";
   };
 
   const handleSendMessage = async () => {
@@ -106,9 +113,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
     inputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  const getMessageIcon = (type: string) => {
-    return type === 'user' ? <User className="h-5 w-5" /> : <Bot className="h-5 w-5" />;
-  };
+
 
   const quickActions = [
     { icon: Trophy, label: "Tournament NFT", action: "Create a gaming tournament with automatic bracket management" },
@@ -118,9 +123,9 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
   ];
 
   return (
-    <div className="flex flex-col" style={{ height: 'calc(100vh - 4rem)', backgroundColor: 'var(--background-color)' }}>
+    <div className="flex flex-col h-full bg-black">
       {/* Chat Header */}
-      <div className="px-6 py-4 border-b border-gray-700 bg-surface">
+      <div className="px-6 py-4 border-b border-gray-700 bg-black">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="p-2 icon-container">
@@ -140,16 +145,15 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
 
       {/* Quick Actions */}
       {messages.length <= 1 && (
-        <div className="px-6 py-4 bg-surface border-b border-gray-700">
-          <p className="text-sm text-gray-400 mb-3">Quick start with popular NFT types:</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="px-4 py-2 bg-black border-b border-gray-700">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {quickActions.map((action, index) => (
               <button
                 key={index}
                 onClick={() => setInputValue(action.action)}
                 className="quick-action-btn"
               >
-                <action.icon className="h-5 w-5 icon-container-accent" />
+                <action.icon className="h-4 w-4 icon-container-accent" />
                 <span className="text-xs text-white font-medium">{action.label}</span>
               </button>
             ))}
@@ -158,85 +162,76 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isWalletConnected 
       )}
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-        {/* Project Showcase - only show initially */}
-        {messages.length <= 1 && (
-          <ProjectShowcase onLaunchChat={handleLaunchChat} />
-        )}
-        
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div className={`flex items-start space-x-3 max-w-2xl ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-              <div className={`p-2 icon-container ${message.type === 'user' ? 'bg-accent' : 'bg-surface'}`}>
-                {getMessageIcon(message.type)}
-              </div>
-              <div className={`chat-message ${message.type}`}>
-                <div className="whitespace-pre-wrap">{message.content}</div>
-                <div className="text-xs opacity-70 mt-2">
-                  {message.timestamp.toLocaleTimeString()}
+      <div className="flex-1 overflow-y-auto chat-scroll-area" style={{height: 'calc(100vh - 200px)'}}>
+        <div className="p-2">
+          {/* Project Showcase - only show initially */}
+          {messages.length <= 1 && (
+            <div className="mb-4">
+              <ProjectShowcase onLaunchChat={handleLaunchChat} />
+            </div>
+          )}
+          
+          <div className="space-y-2">
+            {messages.map((message) => (
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[75%] px-3 py-2 rounded-lg text-sm ${
+                  message.type === 'user' 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-100 text-gray-900 border border-gray-200'
+                } geist-mono`}>
+                  <div className="whitespace-pre-wrap break-words">{message.content}</div>
+                  {message.metadata && (
+                    <div className="mt-1 text-xs text-gray-600">
+                      {message.metadata.nftType && (
+                        <span>Type: {message.metadata.nftType}</span>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
-
-        {isTyping && (
-          <div className="flex justify-start">
-            <div className="flex items-start space-x-3 max-w-2xl">
-              <div className="p-2 icon-container bg-surface">
-                <Bot className="h-5 w-5" />
-              </div>
-              <div className="chat-message ai">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            ))}
+            
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="max-w-[75%] px-3 py-2 rounded-lg text-sm bg-gray-100 text-gray-900 border border-gray-200 geist-mono">
+                  <div className="flex items-center space-x-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Processing...</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+            <div ref={messagesEndRef} className="h-px" />
           </div>
-        )}
-        
-        <div ref={messagesEndRef} />
+        </div>
       </div>
 
       {/* Input Area */}
-      <div className="bg-surface border-t border-gray-700 px-6 py-4">
+      <div className="flex gap-2 p-3 border-t border-gray-800 w-full bg-white">
         {!isWalletConnected && (
-          <div className="mb-4 p-3 status-warning">
-            <p className="text-yellow-400 text-sm">
-              💡 Connect your wallet to create and deploy redeemable NFTs
-            </p>
+          <div className="absolute bottom-full left-0 right-0 mb-2 p-3 bg-yellow-50 border border-yellow-400 text-yellow-800 text-sm">
+            💡 Connect your wallet to create and deploy redeemable NFTs
           </div>
         )}
-        
-        <div className="flex space-x-3">
-          <div className="flex-1">
-            <textarea
-              ref={inputRef}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Describe the redeemable NFT you want to create..."
-              rows={3}
-              className="adaptic-textarea w-full"
-            />
-          </div>
+        <input
+          ref={inputRef}
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="Describe the redeemable NFT you want to create..."
+          disabled={isTyping}
+          className="flex-1 px-3 py-1.5 border border-gray-300 rounded-none focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 disabled:bg-gray-100 disabled:cursor-not-allowed geist-mono text-sm bg-white text-gray-900"
+        />
+        <div className="relative group">
           <button
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isTyping}
-            className="btn-primary px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 self-end"
+            className="px-4 py-1.5 font-medium text-white rounded-none transition-colors geist-mono border text-sm flex items-center gap-2 bg-blue-600 hover:bg-blue-700 border-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             <Send className="h-4 w-4" />
-            <span>Send</span>
+            {isTyping ? 'AI is typing...' : 'Send'}
           </button>
-        </div>
-        
-        <div className="mt-3 text-xs text-gray-500 text-center">
-          Try: "Create a tournament NFT for a chess competition" or "Help me tokenize my domain portfolio"
         </div>
       </div>
     </div>
