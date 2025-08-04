@@ -1,0 +1,12 @@
+{
+  "address": "YOUR_SMART_CONTRACT_ADDRESS",
+  "secret_key": "YOUR_SECRET_KEY",
+  "node_url": "https://buildnet.massa.net/api/v2",
+  "metadatas": {
+    "TITLE": "Adaptic",
+    "DESCRIPTION": "AI-Powered Redeemable NFTs on Massa",
+    "KEYWORD1": "AI",
+    "KEYWORD2": "NFT",
+    "KEYWORD3": "Massa"
+  }
+}

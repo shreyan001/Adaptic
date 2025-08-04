@@ -1,5 +1,7 @@
 # 🚀 Adaptic Protocol - AI-Powered Redeemable NFTs on Massa
 
+**[Live Demo](https://adaptic.dev.massa-deweb.xyz/)**
+
 ![Adaptic Protocol Banner](https://img.shields.io/badge/Powered%20by-Massa%20Blockchain-purple?style=for-the-badge)
 ![AI Powered](https://img.shields.io/badge/AI%20Powered-LangGraph-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
@@ -171,6 +173,15 @@ http://localhost:5173
 - **[Vite](https://vitejs.dev)** - Fast build tool and dev server
 - **[ESLint](https://eslint.org)** - Code linting and formatting
 - **TypeScript** - Type safety and better DX
+
+---
+
+## 📜 Deployed Contracts
+
+- **NFT Ticket Contract**:
+  - **Address (Buildnet)**: [`AS1vNYMbqQxXUXiZFwkAYKU9a3t7NUoQr4uYWHnPNnxWX4wWYXmm`](https://buildnet.massa.net/address/AS1vNYMbqQxXUXiZFwkAYKU9a3t7NUoQr4uYWHnPNnxWX4wWYXmm)
+  - **Source Code**: [`main.ts`](./contracts/my-massa-contracts/assembly/contracts/main.ts)
+  - **Details**: See the contract's [README](./contracts/my-massa-contracts/README.md).
 
 ---
 

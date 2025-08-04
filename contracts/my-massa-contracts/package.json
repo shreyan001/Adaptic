@@ -47,5 +47,9 @@
     "prettier": "@massalabs/prettier-config-as",
     "engines": {
         "node": ">=16"
+    },
+    "dependencies": {
+        "as-base64": "^0.2.0",
+        "as-bignum": "^0.3.1"
     }
 }

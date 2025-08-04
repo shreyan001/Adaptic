@@ -27,27 +27,12 @@ const contract = await SmartContract.deploy(
 
 console.log('NFT Ticket contract deployed at:', contract.address);
 
-// Test minting a ticket
-console.log('\nMinting a test ticket...');
-const mintArgs = new Args()
-  .addString(account.address!.toString()) // to address
-  .addString('TICKET_001') // tokenId
-  .addU64(BigInt(Date.now() + 86400000)); // expiry (24 hours from now)
-
-const mintResult = await contract.call('mintTicket', mintArgs);
-console.log('Mint transaction:', mintResult.id);
-
-// Check ticket status
-console.log('\nChecking ticket status...');
-const statusArgs = new Args().addString('TICKET_001');
-const statusResult = await contract.read('status', statusArgs);
-console.log('Ticket status:', new TextDecoder().decode(statusResult.value));
-
-// Get deployment events
-const events = await provider.getEvents({
-  smartContractAddress: contract.address,
-});
-
-for (const event of events) {
-  console.log('Event message:', event.data);
-}
+console.log('\nDeployment completed successfully!');
+console.log('Contract functions available:');
+console.log('- mintTicket(to: string, tokenId: string, expiry: u64)');
+console.log('- redeem(tokenId: string)');
+console.log('- status(tokenId: string)');
+console.log('- getOwner(tokenId: string)');
+console.log('\nTo interact with the contract, use the other scripts:');
+console.log('- npm run status (check ticket status)');
+console.log('- npm run redeem (redeem a ticket)');

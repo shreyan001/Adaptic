@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      as-base64:
+        specifier: ^0.2.0
+        version: 0.2.0
+      as-bignum:
+        specifier: ^0.3.1
+        version: 0.3.1
     devDependencies:
       '@as-pect/cli':
         specifier: ^8.1.0

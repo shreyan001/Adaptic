@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 placeholder.ts
 .trae
+deweb_cli_config.json
