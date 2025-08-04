@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Code, Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { EventSourcePolyfill } from 'event-source-polyfill';
+
 import QuickActions from './QuickActions';
 import NFTTicket from './NFTTicket';
 
@@ -229,7 +229,7 @@ Is there something specific you'd like to know about NFTs, or would you like to 
   
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [currentEventSource, setCurrentEventSource] = useState<EventSourcePolyfill | null>(null);
+  const [currentEventSource, setCurrentEventSource] = useState<EventSource | null>(null);
   const [showWelcome, setShowWelcome] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLInputElement>(null);
@@ -277,21 +277,24 @@ Is there something specific you'd like to know about NFTs, or would you like to 
         content: msg.content
       }));
 
-      // Create EventSource for SSE
+      // Create EventSource for SSE with hardcoded URL
       const queryParams = new URLSearchParams({
         input: currentInput,
         chat_history: JSON.stringify(chatHistory)
       });
       
-      const fullUrl = `${apiUrl}?${queryParams}`;
+      // Add wallet address if available
+      if (walletAddress) {
+        queryParams.append('wallet_address', walletAddress);
+        console.log('💼 Sending wallet address to API:', walletAddress);
+      } else {
+        console.log('⚠️ No wallet address available');
+      }
+      
+      const fullUrl = `http://localhost:3001/api/agent?${queryParams}`;
       console.log('📡 Making request to:', fullUrl);
 
-      const eventSource = new EventSourcePolyfill(fullUrl, {
-        headers: {
-          'Accept': 'text/event-stream',
-          'Cache-Control': 'no-cache'
-        }
-      });
+      const eventSource = new EventSource(fullUrl);
 
       setCurrentEventSource(eventSource);
 
@@ -534,18 +537,12 @@ Is there something specific you'd like to know about NFTs, or would you like to 
         <div className="relative group">
           <button
             onClick={() => handleSend()} 
-            disabled={!input.trim() || isLoading || !isWalletConnected}
+            disabled={!input.trim() || isLoading}
             className={`px-6 py-2.5 font-medium text-white rounded-lg transition-colors geist-mono text-sm flex items-center gap-2 shadow-sm
-              ${!isWalletConnected 
-                ? 'bg-gray-500 hover:bg-gray-600' 
-                : 'bg-blue-600 hover:bg-blue-700'} 
+              bg-blue-600 hover:bg-blue-700
               disabled:bg-gray-400 disabled:cursor-not-allowed`}
           >
-            {!isWalletConnected && (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-            )}
+
             {isLoading ? (
               <>
                 <div className="flex gap-1">
@@ -562,11 +559,7 @@ Is there something specific you'd like to know about NFTs, or would you like to 
               </>
             )}
           </button>
-          {!isWalletConnected && (
-            <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              Please connect your wallet to interact with the chat
-            </div>
-          )}
+
         </div>
       </div>
     </div>

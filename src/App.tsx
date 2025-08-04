@@ -121,7 +121,7 @@ function App() {
       <footer className="border-t-2 border-white bg-black p-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs geist-mono uppercase tracking-wider text-white">
           <div className="flex items-center space-x-4 mb-2 sm:mb-0">
-            <span>&copy; 2024 ADAPTIC PROTOCOL</span>
+            <span>&copy; 2025 ADAPTIC PROTOCOL</span>
             <span>•</span>
             <span>MASSA BLOCKCHAIN</span>
           </div>
