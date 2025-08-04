@@ -2,6 +2,7 @@ import {
   bytesToStr,
   SmartContract,
   JsonRpcProvider,
+  Args,
 } from '@massalabs/massa-web3';
 import 'dotenv/config';
 
@@ -12,11 +13,22 @@ const CONTRACT_ADDR = 'AS12N5DvTVwvaLbaniMgDJqKwJ3uXBGwzzGuB1f6fjeSx3nhhahTE';
 // provider will be a JsonRpcPublicProvider instance
 const provider = JsonRpcProvider.buildnet();
 
-const helloContract = new SmartContract(provider, CONTRACT_ADDR);
+const ticketContract = new SmartContract(provider, CONTRACT_ADDR);
 
-const messageBin = await helloContract.read('hello');
+// Example: Check status of a ticket
+const tokenId = 'TICKET_001';
+const statusArgs = new Args().addString(tokenId);
 
-// deserialize message
-const message = bytesToStr(messageBin.value);
-
-console.log(`Received from the contract: ${message}`);
+try {
+  const statusResult = await ticketContract.read('status', statusArgs);
+  const status = bytesToStr(statusResult.value);
+  console.log(`Ticket ${tokenId} status: ${status}`);
+  
+  // Get ticket owner
+  const ownerResult = await ticketContract.read('getOwner', statusArgs);
+  const owner = bytesToStr(ownerResult.value);
+  console.log(`Ticket ${tokenId} owner: ${owner || 'No owner found'}`);
+  
+} catch (error) {
+  console.error('Error reading from contract:', error);
+}
